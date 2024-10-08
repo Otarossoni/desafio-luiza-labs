@@ -19,7 +19,7 @@
 ### :page_with_curl: Índice
 
 1. `[Prática]` Serviço de Consulta de CEP
-   * [*1* - O Projeto](#oprojeto)
+    * [*1* - O Projeto](#oprojeto)
       * [*1.1* - Linguagem](#linguagem)
       * [*1.2* - Arquitetura](#arquitetura)
       * [*1.3* - Padrões](#padroes)
@@ -29,9 +29,11 @@
       * [*1.4* - Estratégia](#estrategia)
         * [*1.4.1* - Performance](#performance)
         * [*1.4.2* - Organização](#organizacao)
-   * [*2* - Tecnologias](#tecnologias)
+    * [*2* - Tecnologias](#tecnologias)
       * [*2.1* - Aplicação](#aplicacao)
       * [*2.1* - Externos](#externos)
+    * [*3* - Rotas](#rotas)
+      * [*3.1* - Públicas](#publicas)
 2. `[Teórica]` [Resposta](#resposta)
 
 ---
@@ -103,6 +105,15 @@ As tecnologias usadas, tanto na aplicação, como nos serviços com os quais ela
   - [PostgreSQL](https://www.postgresql.org/): Um banco de dados robusto e ope-source;
   - [Redis](https://redis.io/): Um banco de dados em memória, usado para cache;
   - [Sentry](https://sentry.io/welcome/): Uma plataforma para registro de erros não tratados da aplicação.
+
+<span id="rotas"></span> 
+
+##### :large_blue_diamond: Rotas
+
+Todas as rotas disponibilizadas pelo serviço:
+
+- <span id="publicas"></span> *Públicas*: 
+  - `GET /api/health-check`: Health Check da API;
 
 ---
 

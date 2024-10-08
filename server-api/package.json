@@ -1,0 +1,30 @@
+{
+  "name": "desafio-luiza-labs",
+  "version": "1.0.0",
+  "description": "Desafio técnico do processo seletivo da Luiza Labs. Trata-se de um serviço de consulta de CEP, cujo objetivo é permitir que o usuário obtenha seu endereço a partir do CEP.",
+  "main": "index.js",
+  "scripts": {
+    "check": "tsc --noEmit",
+    "lint": "eslint src --ext .ts --fix",
+    "start:dev": "tsx watch src/index.ts",
+    "build": "tsup src --minify --out-dir build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Otarossoni/desafio-luiza-labs.git"
+  },
+  "homepage": "https://github.com/Otarossoni/desafio-luiza-labs#readme",
+  "devDependencies": {
+    "@rocketseat/eslint-config": "2.2.2",
+    "@types/node": "^22.7.5",
+    "eslint": "8.57.0",
+    "tsup": "8.3.0",
+    "tsx": "4.19.1",
+    "typescript": "^5.6.3"
+  },
+  "dependencies": {
+    "dotenv": "16.4.5",
+    "fastify": "5.0.0",
+    "zod": "3.23.8"
+  }
+}
