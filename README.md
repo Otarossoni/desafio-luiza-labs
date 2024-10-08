@@ -32,6 +32,7 @@
    * [*2* - Tecnologias](#tecnologias)
       * [*2.1* - Aplicação](#aplicacao)
       * [*2.1* - Externos](#externos)
+2. `[Teórica]` [Resposta](#resposta)
 
 ---
 
@@ -102,3 +103,29 @@ As tecnologias usadas, tanto na aplicação, como nos serviços com os quais ela
   - [PostgreSQL](https://www.postgresql.org/): Um banco de dados robusto e ope-source;
   - [Redis](https://redis.io/): Um banco de dados em memória, usado para cache;
   - [Sentry](https://sentry.io/welcome/): Uma plataforma para registro de erros não tratados da aplicação.
+
+---
+
+<span id="resposta"></span> 
+
+### :scroll: Resposta
+
+**Quando você digita a URL de um site (http://www.netshoes.com.br) no browser e pressiona enter, explique da forma que preferir, o que ocorre nesse processo do protocolo HTTP entre o Client e o Server.**
+
+Para responder a essa questão, levei em consideração exatamente a URL "http://www.netshoes.com.br" e utilizei a CLI curl do Windows para acompanhar as etapas do comportamento de todo o cenário, desde o pressionar da tecla "Enter", até o carregamento da página inicial do site propriamente dito.
+
+1. Ao pressionar em "Enter", o cliente (browser) envia o domínio "netshoes.com.br" para um servidor de resolução de DNS para obter o IP do servidor. Ao receber o IP, realiza uma requisição HTTP através do método GET para o servidor web.
+
+2. O servidor processa a requisição e retorna um status code 301 (Moved Permanently) indicando que o conteúdo da página foi movido permanentemente para outra. Nos cabeçalhos de resposta, existe o header "Location", que contém a nova URL a ser seguida, neste caso "https://www.netshoes.com.br":
+
+<p align="center">
+  <img src="/assets/images/imagem-teorica-1.png" align="center" alt="imagem-teorica-1" />
+</p>
+
+3. Possuindo a nova URL, que agora utiliza o protocolo HTTPS, realiza uma nova requisição GET para o servidor web (não precisa resolver o DNS novamente, pois o domínio não mudou), que, por sua vez, processa a requisição e retorna um status code 200 e o HTML completo da página no body;
+
+<p align="center">
+  <img src="/assets/images/imagem-teorica-2.png" align="center" alt="imagem-teorica-2" />
+</p>
+
+4. O cliente renderiza o HTML em tela, exibindo a tela inicial do site para o usuário.
