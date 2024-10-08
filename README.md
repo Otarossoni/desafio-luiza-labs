@@ -114,6 +114,7 @@ Todas as rotas disponibilizadas pelo serviço:
 
 - <span id="publicas"></span> *Públicas*: 
   - `GET /api/health-check`: Health Check da API;
+  - `GET /api-docs`: Documentação de todas as rotas disponibilizadas pela API;
 
 ---
 
