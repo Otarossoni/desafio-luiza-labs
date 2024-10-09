@@ -7,7 +7,11 @@ export const healthCheckSwagger = {
       description: 'Sucesso',
       type: 'object',
       properties: {
-        status: { type: 'string', description: 'Status da API' },
+        apiStatus: { type: 'string', description: 'Status da API' },
+        databaseStatus: {
+          type: 'string',
+          description: 'Status da conexão com o banco de dados',
+        },
         version: { type: 'string', description: 'Versão da API' },
         uptime: {
           type: 'number',
