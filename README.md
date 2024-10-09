@@ -113,8 +113,9 @@ As tecnologias usadas, tanto na aplicação, como nos serviços com os quais ela
 Todas as rotas disponibilizadas pelo serviço:
 
 - <span id="publicas"></span> *Públicas*: 
-  - `GET /api/health-check`: Health Check da API;
+  - `GET /api`: Health Check da API;
   - `GET /api-docs`: Documentação de todas as rotas disponibilizadas pela API;
+  - `POST /api/register`: Criação de um novo usuário;
 
 ---
 

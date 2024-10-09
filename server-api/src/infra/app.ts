@@ -2,7 +2,13 @@ import fastify, { FastifyInstance } from 'fastify'
 import fastifySwagger from '@fastify/swagger'
 import fastifySwaggerUi from '@fastify/swagger-ui'
 
+import { ZodError } from 'zod'
+import { fromError } from 'zod-validation-error'
+
+import { env } from './env/variables'
+
 import { healthCheckRoutes } from './http/controllers/healthCheck/routes'
+import { userRoutes } from './http/controllers/users/routes'
 
 export const app: FastifyInstance = fastify()
 
@@ -33,3 +39,24 @@ app.register(fastifySwaggerUi, {
 })
 
 app.register(healthCheckRoutes, { prefix: 'api' })
+app.register(userRoutes, { prefix: 'api' })
+
+app.setErrorHandler((error, _request, reply) => {
+  console.log(error)
+  if (error instanceof ZodError) {
+    return reply.status(400).send({
+      message: 'Validation error',
+      issues: fromError(error).details,
+    })
+  }
+
+  if (env.NODE_ENV !== 'production') {
+    console.error(error)
+  } else {
+    // Sentry
+  }
+
+  return reply
+    .status(500)
+    .send({ message: 'Internal server error', issues: [error] })
+})
