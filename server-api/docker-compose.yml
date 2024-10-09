@@ -1,0 +1,14 @@
+version: '3.7'
+
+services:
+  postgres:
+    container_name: desafio-luizalabs-postgres
+    image: bitnami/postgresql
+    ports:
+      - '5432:5432'
+    environment:
+      - POSTGRES_USER=desafio-luizalabs
+      - POSTGRES_PASSWORD=desafio-luizalabs
+      - POSTGRES_DB=desafio-luizalabs
+    volumes:
+      - ./database-data/pg:/bitnami/postgresql
