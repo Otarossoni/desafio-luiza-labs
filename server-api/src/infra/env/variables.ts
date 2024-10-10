@@ -8,6 +8,7 @@ const envSchema = z.object({
   PORT: z.coerce.number().default(3140),
   HASH_SALT_LENGTH: z.coerce.number().default(8),
   JWT_SECRET: z.string(),
+  DNS_SENTRY: z.string(),
 })
 
 const _env = envSchema.safeParse(process.env)

@@ -23,7 +23,6 @@ export const healthCheckSwagger = {
     },
     500: {
       description: 'Internal server error response',
-      type: 'string',
     },
   },
 }

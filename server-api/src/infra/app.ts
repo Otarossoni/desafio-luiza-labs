@@ -4,6 +4,9 @@ import fastifyCors from '@fastify/cors'
 import fastifySwagger from '@fastify/swagger'
 import fastifySwaggerUi from '@fastify/swagger-ui'
 
+import * as Sentry from '@sentry/node'
+import { nodeProfilingIntegration } from '@sentry/profiling-node'
+
 import { ZodError } from 'zod'
 import { fromError } from 'zod-validation-error'
 
@@ -11,6 +14,14 @@ import { env } from './env/variables'
 
 import { healthCheckRoutes } from './http/controllers/healthCheck/routes'
 import { userRoutes } from './http/controllers/users/routes'
+
+Sentry.init({
+  dsn: env.DNS_SENTRY,
+  integrations: [nodeProfilingIntegration()],
+  tracesSampleRate: 1.0,
+  profilesSampleRate: 1.0,
+  attachStacktrace: true,
+})
 
 export const app: FastifyInstance = fastify()
 
@@ -66,10 +77,10 @@ app.setErrorHandler((error, _request, reply) => {
   if (env.NODE_ENV !== 'production') {
     console.error(error)
   } else {
-    // Sentry
+    Sentry.captureException(error)
   }
 
   return reply
     .status(500)
-    .send({ message: 'Internal server error', issues: [error] })
+    .send({ message: 'Internal server error', issues: [error.message] })
 })

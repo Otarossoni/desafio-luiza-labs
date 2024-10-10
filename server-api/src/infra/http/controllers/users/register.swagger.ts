@@ -33,7 +33,6 @@ export const registerSwagger = {
     },
     500: {
       description: 'Erro interno do servidor',
-      type: 'string',
     },
   },
 }

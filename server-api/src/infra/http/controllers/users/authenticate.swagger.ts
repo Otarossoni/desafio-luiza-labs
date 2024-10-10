@@ -35,7 +35,6 @@ export const authenticateSwagger = {
     },
     500: {
       description: 'Internal server error response',
-      type: 'string',
     },
   },
 }
