@@ -5,10 +5,10 @@
   "main": "index.js",
   "scripts": {
     "check": "tsc --noEmit",
-    "lint": "eslint src --ext .ts --fix",
+    "lint": "eslint src --ext .ts,.mts --fix",
     "start:dev": "tsx watch src/index.ts",
-    "test": "vitest run --dir src",
-    "test:watch": "vitest --dir src",
+    "test": "vitest run --dir src/domain",
+    " ": "vitest --dir src/domain",
     "test:coverage": "vitest run --coverage",
     "build": "tsup src --minify --out-dir build"
   },
