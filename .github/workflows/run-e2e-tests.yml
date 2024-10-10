@@ -18,15 +18,24 @@ jobs:
           POSTGRESQL_DATABASE: docker
 
     steps:
-      - uses: actions/checkout@v3
+      - name: Prepare code
+        uses: actions/checkout@v3
 
-      - uses: actions/setup-node@v3
+      - name: Prepare Node.js
+        uses: actions/setup-node@v3
         with:
           node-version: 20
 
-      - run: npm install
+      - name: Install packages
+        run: npm install
+        working-directory: ./server-api
 
-      - run: npm run test:e2e
+      - name: Run tests
+        run: npm run test:e2e
+        working-directory: ./server-api
         env:
+          NODE_ENV: development
+          HASH_SALT_LENGTH: 8
           JWT_SECRET: testing
           DATABASE_URL: "postgresql://docker:docker@localhost:5432/docker?schema=public"
+          
