@@ -25,7 +25,7 @@ export const registerSwagger = {
       type: 'null',
     },
     409: {
-      description: 'Conflict response',
+      description: 'Usuário já existe',
       type: 'object',
       properties: {
         message: { type: 'string' },

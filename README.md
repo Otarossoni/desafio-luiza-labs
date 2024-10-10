@@ -116,6 +116,7 @@ Todas as rotas disponibilizadas pelo serviço:
   - `GET /api`: Health Check da API;
   - `GET /api-docs`: Documentação de todas as rotas disponibilizadas pela API;
   - `POST /api/register`: Criação de um novo usuário;
+  - `POST /api/authenticate`: Autenticação de usuário existente;
 
 ---
 
