@@ -1,5 +1,4 @@
 import fastify, { FastifyInstance } from 'fastify'
-import fastifyJwt from '@fastify/jwt'
 import fastifyCors from '@fastify/cors'
 import fastifySwagger from '@fastify/swagger'
 import fastifySwaggerUi from '@fastify/swagger-ui'
@@ -24,13 +23,6 @@ Sentry.init({
 })
 
 export const app: FastifyInstance = fastify()
-
-app.register(fastifyJwt, {
-  secret: env.JWT_SECRET,
-  sign: {
-    expiresIn: '30m',
-  },
-})
 
 app.register(fastifyCors, {
   origin: true,

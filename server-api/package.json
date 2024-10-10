@@ -8,8 +8,10 @@
     "lint": "eslint src --ext .ts,.mts --fix",
     "start:dev": "tsx watch src/index.ts",
     "test": "vitest run --dir src/domain",
-    " ": "vitest --dir src/domain",
+    "test:watch": "vitest --dir src/domain",
     "test:coverage": "vitest run --coverage",
+    "test:e2e": "vitest run --config ./vite.config-e2e.mts",
+    "test:e2e:watch": "vitest --config ./vite.config-e2e.mts",
     "build": "tsup src --minify --out-dir build"
   },
   "repository": {
@@ -20,6 +22,7 @@
   "devDependencies": {
     "@rocketseat/eslint-config": "2.2.2",
     "@types/bcryptjs": "2.4.6",
+    "@types/jsonwebtoken": "9.0.7",
     "@types/node": "^22.7.5",
     "@vitest/coverage-v8": "2.1.2",
     "eslint": "8.57.0",
@@ -31,7 +34,6 @@
   },
   "dependencies": {
     "@fastify/cors": "10.0.1",
-    "@fastify/jwt": "9.0.1",
     "@fastify/swagger": "9.1.0",
     "@fastify/swagger-ui": "5.0.1",
     "@prisma/client": "5.20.0",
@@ -40,6 +42,7 @@
     "bcryptjs": "2.4.3",
     "dotenv": "16.4.5",
     "fastify": "5.0.0",
+    "jsonwebtoken": "9.0.2",
     "zod": "3.23.8",
     "zod-validation-error": "3.4.0"
   }
