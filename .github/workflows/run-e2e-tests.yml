@@ -15,7 +15,7 @@ jobs:
         env:
           POSTGRESQL_USERNAME: docker
           POSTGRESQL_PASSWORD: docker
-          POSTGRESQL_DATABASE: docker
+          POSTGRESQL_DATABASE: desafio-luizalabs-postgres
 
     steps:
       - name: Prepare code
@@ -30,12 +30,9 @@ jobs:
         run: npm install
         working-directory: ./server-api
 
-      - name: Run tests
+      - name: Run Tests
         run: npm run test:e2e
         working-directory: ./server-api
         env:
-          NODE_ENV: development
-          HASH_SALT_LENGTH: 8
           JWT_SECRET: testing
-          DATABASE_URL: "postgresql://docker:docker@localhost:5432/docker?schema=public"
-          
+          DATABASE_URL: "postgresql://docker:docker@localhost:5432/desafio-luizalabs-postgres?schema=public"
