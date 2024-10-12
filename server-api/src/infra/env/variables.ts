@@ -9,6 +9,8 @@ const envSchema = z.object({
   HASH_SALT_LENGTH: z.coerce.number().default(8),
   JWT_SECRET: z.string(),
   DNS_SENTRY: z.string(),
+  NEW_RELIC_API_URL: z.string(),
+  NEW_RELIC_LICENSE_KEY: z.string(),
 })
 
 const _env = envSchema.safeParse(process.env)

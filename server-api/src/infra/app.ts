@@ -9,11 +9,16 @@ import { nodeProfilingIntegration } from '@sentry/profiling-node'
 import { ZodError } from 'zod'
 import { fromError } from 'zod-validation-error'
 
+import jwt from 'jsonwebtoken'
+
 import { env } from './env/variables'
 
 import { healthCheckRoutes } from './http/controllers/healthCheck/routes'
 import { userRoutes } from './http/controllers/users/routes'
 import { cepRoutes } from './http/controllers/address/routes'
+
+import { NewRelicLogsRepository } from './service/new-relic-logs-repository'
+import { Log } from 'src/domain/repositories/service/logs-repository'
 
 Sentry.init({
   dsn: env.DNS_SENTRY,
@@ -58,6 +63,31 @@ app.register(fastifySwaggerUi, {
 app.register(healthCheckRoutes, { prefix: 'api' })
 app.register(userRoutes, { prefix: 'api' })
 app.register(cepRoutes, { prefix: 'api' })
+
+app.addHook('onSend', async (request, response, responseBody) => {
+  const newLog: Log = {
+    level: 0,
+    userId: '',
+    path: request.url,
+    requestBody: JSON.stringify(request.body),
+    responseBody: JSON.stringify(responseBody),
+  }
+
+  if (response.statusCode !== 200 && response.statusCode !== 201) {
+    newLog.level = 1
+  }
+
+  if (request.headers?.authorization?.split(' ')[1] !== '') {
+    const jwtDecoded = jwt.decode(request.headers?.authorization?.split(' ')[1])
+
+    if (typeof jwtDecoded !== 'string') {
+      newLog.userId = jwtDecoded?.payload?.sub ?? ''
+    }
+  }
+
+  const logsRepository = new NewRelicLogsRepository()
+  logsRepository.log(newLog)
+})
 
 app.setErrorHandler((error, _request, reply) => {
   console.log(error)

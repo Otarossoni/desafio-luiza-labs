@@ -81,9 +81,9 @@ Os padrões principais são:
 Por mais que o projeto tenha um pequeno escopo, foquei em dois principais fatores, organização e performance. Pois, mesmo com poucas funcionalidades, qualquer descuido pode gerar efeitos indesejados.
 
 - <span id="organizacao"></span> *Organização*: utilizando os padrões já citados, organizei a aplicação para cada parte ter sua função e que as mais internas não sofressem impacto ou interferência das mais externas; 
-- <span id="performance"></span> *Performance*: alguns pequenas medidas foram tomadas para diminuir a quantidade de consultas no banco de dados, como:
+- <span id="performance"></span> *Performance*: algumas pequenas medidas foram tomadas para diminuir a quantidade de consultas no banco de dados, como:
   - Antes de buscar o endereço no banco de dados, uma consulta é feita no cache. Se as informações estiverem no cache, a busca no banco não é realizada. Caso o endereço não seja encontrado no cache, a busca é feita no banco de dados, e os dados obtidos são inseridos no cache para consultas futuras;
-  - Para a obtenção de métricas, as informações são sempre buscadas no cache, e um cronjob atualiza esses dados a cada 30 segundos.
+  - Em vez de, a cada vez que o endereço não for encontrado no banco, gerar um novo CEP possível e buscar novamente (caso não esteja no cache), a aplicação gera todos os possíveis CEPs de uma vez e os busca utilizando um `WHERE IN`, ordenando para que sempre retorne o CEP mais próximo do original.
 
 <span id="tecnologias"></span> 
 
@@ -99,13 +99,13 @@ As tecnologias usadas, tanto na aplicação, como nos serviços com os quais ela
   - [Zod](https://zod.dev/): O pacote de validação de dados, usado para validar a entrada de dados na aplicação, seja pelas rotas, como variáveis de ambiente;
   - [JWT](https://jwt.io/): O método de validação de segurança entre cliente e servidor;
   - [Swagger](https://swagger.io/): A ferramenta de documentação de APIs;
-  - [Vitest](https://vitest.dev/): O framework para execução de testes automatizados;
-  - [CronJob](https://www.npmjs.com/package/cron): Um pacote para executar rotinas entre espaços de tempo configuráveis.
+  - [Vitest](https://vitest.dev/): O framework para execução de testes automatizados.
 - <span id="externos"></span> *Externos*:
   - [Docker](https://www.docker.com/): Uma plataforma para gerenciamento de containers;
   - [PostgreSQL](https://www.postgresql.org/): Um banco de dados robusto e ope-source;
   - [Redis](https://redis.io/): Um banco de dados em memória, usado para cache;
   - [Sentry](https://sentry.io/welcome/): Uma plataforma para registro de erros não tratados da aplicação.
+  - [New Relic](https://newrelic.com/pt): Uma plataforma para registro de logs da aplicação e monitoramento de recursos.
 
 <span id="rotas"></span> 
 
