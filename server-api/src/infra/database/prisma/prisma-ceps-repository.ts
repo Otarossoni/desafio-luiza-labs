@@ -1,8 +1,8 @@
+import { DBCepsRepository } from 'src/domain/repositories/database/db-ceps-repository'
+
 import { prisma } from '../connection'
 
-import { CepsRepository } from 'src/domain/repositories/database/ceps-repository'
-
-export class PrismaCepsRepository implements CepsRepository {
+export class PrismaCepsRepository implements DBCepsRepository {
   async findByCepList(cepsList: string[]) {
     const cepsFound = await prisma.cep.findMany({
       where: {

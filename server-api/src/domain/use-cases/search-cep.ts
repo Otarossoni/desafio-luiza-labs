@@ -2,7 +2,11 @@ import { Either, left, right } from 'src/core/errors/either'
 import { ResourceNotFoundError } from './errors/resource-not-found-error'
 import { ResourceInvalidError } from './errors/resource-invalid-error'
 
-import { CepsRepository } from '../repositories/database/ceps-repository'
+import { DBCepsRepository } from '../repositories/database/db-ceps-repository'
+import {
+  CacheCepsRepository,
+  CepInternal,
+} from '../repositories/cache/cache-ceps-repository'
 
 interface SearchCepUseCaseRequest {
   cep: string
@@ -10,17 +14,14 @@ interface SearchCepUseCaseRequest {
 
 type SearchCepUseCaseResponse = Either<
   ResourceInvalidError | ResourceNotFoundError,
-  {
-    cep: string
-    rua: string
-    bairro: string
-    cidade: string
-    estado: string
-  }
+  CepInternal
 >
 
 export class SearchCepUseCase {
-  constructor(private cepsRepository: CepsRepository) {}
+  constructor(
+    private dbCepsRepository: DBCepsRepository,
+    private cacheCepsRepository: CacheCepsRepository,
+  ) {}
 
   async execute({
     cep,
@@ -31,13 +32,23 @@ export class SearchCepUseCase {
 
     const possibleCeps = this.generatePossibleCeps(cep)
 
-    const addresses = await this.cepsRepository.findByCepList(possibleCeps)
+    for (const possibleCep of possibleCeps) {
+      const address = await this.cacheCepsRepository.findByCep(possibleCep)
+
+      if (address) {
+        return right(address)
+      }
+    }
+
+    const addresses = await this.dbCepsRepository.findByCepList(possibleCeps)
 
     const address = addresses.find((addr) => addr.cep === cep) || addresses[0]
 
     if (!address) {
       return left(new ResourceNotFoundError('CEP'))
     }
+
+    this.cacheCepsRepository.createCep(address.cep, address)
 
     return right({
       cep: address.cep,

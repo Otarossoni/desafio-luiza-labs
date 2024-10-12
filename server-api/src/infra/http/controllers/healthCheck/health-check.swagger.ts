@@ -12,6 +12,10 @@ export const healthCheckSwagger = {
           type: 'string',
           description: 'Status da conexão com o banco de dados',
         },
+        cacheStatus: {
+          type: 'string',
+          description: 'Status da conexão com o serviço de cache',
+        },
         version: { type: 'string', description: 'Versão da API' },
         uptime: {
           type: 'number',

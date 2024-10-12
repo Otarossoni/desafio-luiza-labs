@@ -5,18 +5,21 @@ import { faker } from '@faker-js/faker'
 
 import { SearchCepUseCase } from './search-cep'
 
-import { InMemoryCepsRepository } from 'test/repositories/database/in-memory-ceps-repository'
+import { InMemoryDBCepsRepository } from 'test/repositories/database/in-memory-bd-ceps-repository'
 
 import { ResourceNotFoundError } from './errors/resource-not-found-error'
 import { ResourceInvalidError } from './errors/resource-invalid-error'
+import { InMemoryCacheCepsRepository } from 'test/repositories/cache/in-memory-cache-ceps-repository'
 
-let cepsRepository: InMemoryCepsRepository
+let dbCepsRepository: InMemoryDBCepsRepository
+let cacheCepsRepository: InMemoryCacheCepsRepository
 let sut: SearchCepUseCase
 
 describe('Search CEP Use Case', () => {
   beforeEach(() => {
-    cepsRepository = new InMemoryCepsRepository()
-    sut = new SearchCepUseCase(cepsRepository)
+    dbCepsRepository = new InMemoryDBCepsRepository()
+    cacheCepsRepository = new InMemoryCacheCepsRepository()
+    sut = new SearchCepUseCase(dbCepsRepository, cacheCepsRepository)
   })
 
   it('should be able to search a Address by CEP', async () => {
@@ -30,12 +33,42 @@ describe('Search CEP Use Case', () => {
       estado: faker.location.state(),
     }
 
-    cepsRepository.items.push(newAddress)
+    dbCepsRepository.items.push(newAddress)
 
     const result = await sut.execute({ cep: '12345678' })
 
     expect(result.isRight()).toEqual(true)
-    expect(cepsRepository.items).toHaveLength(1)
+    expect(dbCepsRepository.items).toHaveLength(1)
+    expect(result.value).toEqual(
+      expect.objectContaining({
+        rua: newAddress.rua,
+        bairro: newAddress.bairro,
+        cidade: newAddress.cidade,
+        estado: newAddress.estado,
+      }),
+    )
+  })
+
+  it('should be able to search a Address by CEP a second time', async () => {
+    const newAddress = {
+      id: randomUUID(),
+      created_at: new Date(),
+      cep: '12345678',
+      rua: faker.location.street(),
+      bairro: faker.location.streetAddress(),
+      cidade: faker.location.city(),
+      estado: faker.location.state(),
+    }
+
+    dbCepsRepository.items.push(newAddress)
+
+    // Busca uma primeira vez para gravar em cache
+    await sut.execute({ cep: '12345678' })
+
+    const result = await sut.execute({ cep: '12345678' })
+
+    expect(result.isRight()).toEqual(true)
+    expect(dbCepsRepository.items).toHaveLength(1)
     expect(result.value).toEqual(
       expect.objectContaining({
         rua: newAddress.rua,
@@ -57,12 +90,12 @@ describe('Search CEP Use Case', () => {
       estado: faker.location.state(),
     }
 
-    cepsRepository.items.push(newAddress)
+    dbCepsRepository.items.push(newAddress)
 
     const result = await sut.execute({ cep: '12345678' })
 
     expect(result.isRight()).toEqual(true)
-    expect(cepsRepository.items).toHaveLength(1)
+    expect(dbCepsRepository.items).toHaveLength(1)
     expect(result.value).toEqual(
       expect.objectContaining({
         rua: newAddress.rua,
@@ -74,7 +107,7 @@ describe('Search CEP Use Case', () => {
   })
 
   it('should not be able to search a address with wrong CEP code', async () => {
-    cepsRepository.items.push({
+    dbCepsRepository.items.push({
       created_at: new Date(),
       cep: '12345678',
       rua: faker.location.street(),
@@ -90,7 +123,7 @@ describe('Search CEP Use Case', () => {
   })
 
   it('should not be able to search a address with invalid CEP code', async () => {
-    cepsRepository.items.push({
+    dbCepsRepository.items.push({
       created_at: new Date(),
       cep: '12345678',
       rua: faker.location.street(),

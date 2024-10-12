@@ -1,7 +1,7 @@
 import { Cep } from '@prisma/client'
-import { CepsRepository } from 'src/domain/repositories/database/ceps-repository'
+import { DBCepsRepository } from 'src/domain/repositories/database/db-ceps-repository'
 
-export class InMemoryCepsRepository implements CepsRepository {
+export class InMemoryDBCepsRepository implements DBCepsRepository {
   public items: Cep[] = []
 
   async findByCepList(cepsList: string[]) {

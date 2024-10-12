@@ -12,3 +12,10 @@ services:
       - POSTGRES_DB=desafio-luizalabs
     volumes:
       - ./database-data/pg:/bitnami/postgresql
+
+  redis:
+    container_name: desafio-luizalabs-redis
+    image: bitnami/redis
+    ports:
+      - '6379:6379'
+    command: redis-server --requirepass desafio-luizalabs --save ""

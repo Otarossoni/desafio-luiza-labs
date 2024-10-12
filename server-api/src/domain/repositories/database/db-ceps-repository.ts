@@ -1,5 +1,5 @@
 import { Cep } from '@prisma/client'
 
-export interface CepsRepository {
+export interface DBCepsRepository {
   findByCepList(cepsList: string[]): Promise<Cep[]>
 }
