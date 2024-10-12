@@ -1,6 +1,6 @@
 import { Either, left, right } from '../../core/errors/either'
 
-import { UsersRepository } from '../repositories/database/user-repository'
+import { UsersRepository } from '../repositories/database/users-repository'
 import { HashRepository } from '../repositories/cryptography/hash-repository'
 import { EncrypterRepository } from '../repositories/cryptography/encrypt-repository'
 

@@ -1,7 +1,7 @@
 import { Either, left, right } from 'src/core/errors/either'
 import { ResourceAlreadyExistsError } from './errors/resource-already-exists-error'
 
-import { UsersRepository } from '../repositories/database/user-repository'
+import { UsersRepository } from '../repositories/database/users-repository'
 import { HashRepository } from '../repositories/cryptography/hash-repository'
 
 interface RegisterUseCaseRequest {
@@ -26,7 +26,7 @@ export class RegisterUseCase {
     const userAlreadyExists = await this.usersRepository.findByEmail(email)
 
     if (userAlreadyExists) {
-      return left(new ResourceAlreadyExistsError('User'))
+      return left(new ResourceAlreadyExistsError('Usuário'))
     }
 
     const hashedPassword = await this.hashRepository.generate(password)

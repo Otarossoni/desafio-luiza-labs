@@ -13,6 +13,7 @@ import { env } from './env/variables'
 
 import { healthCheckRoutes } from './http/controllers/healthCheck/routes'
 import { userRoutes } from './http/controllers/users/routes'
+import { cepRoutes } from './http/controllers/address/routes'
 
 Sentry.init({
   dsn: env.DNS_SENTRY,
@@ -56,6 +57,7 @@ app.register(fastifySwaggerUi, {
 
 app.register(healthCheckRoutes, { prefix: 'api' })
 app.register(userRoutes, { prefix: 'api' })
+app.register(cepRoutes, { prefix: 'api' })
 
 app.setErrorHandler((error, _request, reply) => {
   console.log(error)

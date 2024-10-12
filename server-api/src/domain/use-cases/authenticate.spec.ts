@@ -4,13 +4,13 @@ import { describe, beforeEach, it, expect } from 'vitest'
 
 import { AuthenticateUseCase } from './authenticate'
 
-import { InMemoryUserRepository } from 'test/repositories/database/in-memory-user-repository'
+import { InMemoryUsersRepository } from 'test/repositories/database/in-memory-users-repository'
 import { FakeHashRepository } from 'test/repositories/cryptography/fake-hasher'
 import { FakeEncrypter } from 'test/repositories/cryptography/fake-encrypter'
 
 import { WrongCredentialsError } from './errors/wrong-credentials-error'
 
-let inMemoryUserRepository: InMemoryUserRepository
+let inMemoryUserRepository: InMemoryUsersRepository
 let fakeHashRepository: FakeHashRepository
 let fakeEncrypter: FakeEncrypter
 
@@ -18,7 +18,7 @@ let sut: AuthenticateUseCase
 
 describe('Authenticate Use Case', () => {
   beforeEach(() => {
-    inMemoryUserRepository = new InMemoryUserRepository()
+    inMemoryUserRepository = new InMemoryUsersRepository()
     fakeHashRepository = new FakeHashRepository()
     fakeEncrypter = new FakeEncrypter()
 

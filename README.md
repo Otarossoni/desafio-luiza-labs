@@ -34,6 +34,7 @@
       * [*2.1* - Externos](#externos)
     * [*3* - Rotas](#rotas)
       * [*3.1* - Públicas](#publicas)
+      * [*3.1* - Autenticadas](#autenticadas)
 2. `[Teórica]` [Resposta](#resposta)
 
 ---
@@ -117,6 +118,8 @@ Todas as rotas disponibilizadas pelo serviço:
   - `GET /api-docs`: Documentação de todas as rotas disponibilizadas pela API;
   - `POST /api/register`: Criação de um novo usuário;
   - `POST /api/authenticate`: Autenticação de usuário existente;
+- <span id="autenticadas"></span> *Autenticadas*: 
+  - `GET /api/cep/:cep`: Busca dados de endereço pelo CEP;
 
 ---
 

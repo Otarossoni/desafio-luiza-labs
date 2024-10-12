@@ -1,6 +1,7 @@
 import { PrismaUsersRepository } from 'src/infra/database/prisma/prisma-users-repository'
-import { RegisterUseCase } from '../use-cases/register'
 import { BcryptHashRepository } from 'src/infra/cryptography/bcrypt/bcrypt-hash-repository'
+
+import { RegisterUseCase } from '../use-cases/register'
 
 export function makeRegisterUseCase() {
   const usersRepository = new PrismaUsersRepository()

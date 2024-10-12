@@ -3,18 +3,18 @@ import { describe, it, beforeEach, expect } from 'vitest'
 import { RegisterUseCase } from './register'
 
 import { FakeHashRepository } from '../../../test/repositories/cryptography/fake-hasher'
-import { InMemoryUserRepository } from '../../../test/repositories/database/in-memory-user-repository'
+import { InMemoryUsersRepository } from '../../../test/repositories/database/in-memory-users-repository'
 
 import { ResourceAlreadyExistsError } from './errors/resource-already-exists-error'
 
-let inMemoryUserRepository = new InMemoryUserRepository()
+let inMemoryUserRepository = new InMemoryUsersRepository()
 let fakeHashRepository = new FakeHashRepository()
 
 let sut: RegisterUseCase
 
 describe('Register Use Case', () => {
   beforeEach(() => {
-    inMemoryUserRepository = new InMemoryUserRepository()
+    inMemoryUserRepository = new InMemoryUsersRepository()
     fakeHashRepository = new FakeHashRepository()
 
     sut = new RegisterUseCase(inMemoryUserRepository, fakeHashRepository)

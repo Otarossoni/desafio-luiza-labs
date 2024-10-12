@@ -2,9 +2,9 @@ import { randomUUID } from 'node:crypto'
 
 import { User } from '@prisma/client'
 
-import { UsersRepository } from '../../../src/domain/repositories/database/user-repository'
+import { UsersRepository } from '../../../src/domain/repositories/database/users-repository'
 
-export class InMemoryUserRepository implements UsersRepository {
+export class InMemoryUsersRepository implements UsersRepository {
   public items: User[] = []
 
   async findByEmail(email: string): Promise<User | null> {

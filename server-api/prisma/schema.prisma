@@ -16,3 +16,14 @@ model User {
 
   @@map("users")
 }
+
+model Cep {
+  cep        String   @unique
+  rua        String
+  bairro     String
+  cidade     String
+  estado     String
+  created_at DateTime @default(now())
+
+  @@map("ceps")
+}
