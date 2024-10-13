@@ -1,8 +1,6 @@
 import { redis } from '../connection'
-import {
-  CacheCepsRepository,
-  CepInternal,
-} from 'src/domain/repositories/cache/cache-ceps-repository'
+import { CepInternal } from 'src/domain/models/cep-internal'
+import { CacheCepsRepository } from 'src/domain/repositories/cache/cache-ceps-repository'
 
 export class RedisCepsRepository implements CacheCepsRepository {
   async createCep(cep: string, address: CepInternal) {

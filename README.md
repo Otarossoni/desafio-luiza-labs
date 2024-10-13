@@ -99,13 +99,15 @@ As tecnologias usadas, tanto na aplicação, como nos serviços com os quais ela
   - [Zod](https://zod.dev/): O pacote de validação de dados, usado para validar a entrada de dados na aplicação, seja pelas rotas, como variáveis de ambiente;
   - [JWT](https://jwt.io/): O método de validação de segurança entre cliente e servidor;
   - [Swagger](https://swagger.io/): A ferramenta de documentação de APIs;
-  - [Vitest](https://vitest.dev/): O framework para execução de testes automatizados.
+  - [Vitest](https://vitest.dev/): O framework para execução de testes automatizados;
+  - [Faker](https://www.npmjs.com/package/@faker-js/faker): O pacote para mock de dados para testes.
 - <span id="externos"></span> *Externos*:
   - [Docker](https://www.docker.com/): Uma plataforma para gerenciamento de containers;
   - [PostgreSQL](https://www.postgresql.org/): Um banco de dados robusto e ope-source;
   - [Redis](https://redis.io/): Um banco de dados em memória, usado para cache;
-  - [Sentry](https://sentry.io/welcome/): Uma plataforma para registro de erros não tratados da aplicação.
-  - [New Relic](https://newrelic.com/pt): Uma plataforma para registro de logs da aplicação e monitoramento de recursos.
+  - [Sentry](https://sentry.io/welcome/): Uma plataforma para registro de erros não tratados da aplicação;
+  - [New Relic](https://newrelic.com/pt): Uma plataforma para registro de logs da aplicação e monitoramento de recursos;
+  - [ViaCEP](https://viacep.com.br/): API externa para consulta de CEPs, uma opção a mais para responder ao usuário caso o CEP não exista na base de dados.
 
 <span id="rotas"></span> 
 

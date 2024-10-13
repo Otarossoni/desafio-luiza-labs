@@ -2,11 +2,11 @@ import { Either, left, right } from 'src/core/errors/either'
 import { ResourceNotFoundError } from './errors/resource-not-found-error'
 import { ResourceInvalidError } from './errors/resource-invalid-error'
 
+import { CepInternal } from '../models/cep-internal'
+
 import { DBCepsRepository } from '../repositories/database/db-ceps-repository'
-import {
-  CacheCepsRepository,
-  CepInternal,
-} from '../repositories/cache/cache-ceps-repository'
+import { CacheCepsRepository } from '../repositories/cache/cache-ceps-repository'
+import { ExternalCepsRepository } from '../repositories/service/external-ceps-repository'
 
 interface SearchCepUseCaseRequest {
   cep: string
@@ -21,6 +21,7 @@ export class SearchCepUseCase {
   constructor(
     private dbCepsRepository: DBCepsRepository,
     private cacheCepsRepository: CacheCepsRepository,
+    private externalCepsRepository: ExternalCepsRepository,
   ) {}
 
   async execute({
@@ -33,30 +34,34 @@ export class SearchCepUseCase {
     const possibleCeps = this.generatePossibleCeps(cep)
 
     for (const possibleCep of possibleCeps) {
-      const address = await this.cacheCepsRepository.findByCep(possibleCep)
+      const cacheAddress = await this.cacheCepsRepository.findByCep(possibleCep)
 
-      if (address) {
-        return right(address)
+      if (cacheAddress) {
+        return right(cacheAddress)
       }
     }
 
-    const addresses = await this.dbCepsRepository.findByCepList(possibleCeps)
+    const dbAddresses = await this.dbCepsRepository.findByCepList(possibleCeps)
 
-    const address = addresses.find((addr) => addr.cep === cep) || addresses[0]
+    const dbAddress =
+      dbAddresses.find((addr) => addr.cep === cep) || dbAddresses[0]
 
-    if (!address) {
-      return left(new ResourceNotFoundError('CEP'))
+    if (!dbAddress) {
+      const externalAddress = await this.externalCepsRepository.findByCep(cep)
+
+      if (!externalAddress) {
+        return left(new ResourceNotFoundError('CEP'))
+      }
+
+      this.dbCepsRepository.createCep(externalAddress.cep, externalAddress)
+      this.cacheCepsRepository.createCep(externalAddress.cep, externalAddress)
+
+      return right(externalAddress)
     }
 
-    this.cacheCepsRepository.createCep(address.cep, address)
+    this.cacheCepsRepository.createCep(dbAddress.cep, dbAddress)
 
-    return right({
-      cep: address.cep,
-      rua: address.rua,
-      bairro: address.bairro,
-      cidade: address.cidade,
-      estado: address.estado,
-    })
+    return right(dbAddress)
   }
 
   private generatePossibleCeps(cep: string): string[] {

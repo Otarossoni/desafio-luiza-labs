@@ -8,7 +8,7 @@ import { ResourceNotFoundError } from 'src/domain/use-cases/errors/resource-not-
 
 export async function searchCep(request: FastifyRequest, reply: FastifyReply) {
   const searchCepParamsSchema = z.object({
-    cep: z.string(),
+    cep: z.string().transform((value) => value.replaceAll('-', '')),
   })
 
   const { cep } = searchCepParamsSchema.parse(request.params)

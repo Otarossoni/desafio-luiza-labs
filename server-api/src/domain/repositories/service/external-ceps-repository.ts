@@ -1,6 +1,5 @@
 import { CepInternal } from 'src/domain/models/cep-internal'
 
-export interface CacheCepsRepository {
-  createCep(cep: string, address: CepInternal): Promise<void>
+export interface ExternalCepsRepository {
   findByCep(cep: string): Promise<CepInternal | null>
 }

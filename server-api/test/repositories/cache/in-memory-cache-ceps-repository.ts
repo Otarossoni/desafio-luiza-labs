@@ -1,7 +1,5 @@
-import {
-  CacheCepsRepository,
-  CepInternal,
-} from 'src/domain/repositories/cache/cache-ceps-repository'
+import { CepInternal } from 'src/domain/models/cep-internal'
+import { CacheCepsRepository } from 'src/domain/repositories/cache/cache-ceps-repository'
 
 export class InMemoryCacheCepsRepository implements CacheCepsRepository {
   public items = new Map()
