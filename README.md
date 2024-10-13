@@ -107,7 +107,8 @@ As tecnologias usadas, tanto na aplicação, como nos serviços com os quais ela
   - [Redis](https://redis.io/): Um banco de dados em memória, usado para cache;
   - [Sentry](https://sentry.io/welcome/): Uma plataforma para registro de erros não tratados da aplicação;
   - [New Relic](https://newrelic.com/pt): Uma plataforma para registro de logs da aplicação e monitoramento de recursos;
-  - [ViaCEP](https://viacep.com.br/): API externa para consulta de CEPs, uma opção a mais para responder ao usuário caso o CEP não exista na base de dados.
+  - [ViaCEP](https://viacep.com.br/): API externa para consulta de CEPs, uma opção a mais para responder ao usuário caso o CEP não exista na base de dados;
+  - [Postman](https://www.postman.com/): A ferramento para testar aplicação através de requisições HTTP.
 
 <span id="rotas"></span> 
 

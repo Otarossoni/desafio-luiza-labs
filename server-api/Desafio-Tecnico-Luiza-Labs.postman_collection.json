@@ -1,0 +1,158 @@
+{
+	"info": {
+		"_postman_id": "3c961d35-f1c3-404f-a8dc-8c3be79ca76c",
+		"name": "Desafio-Tecnico-Luiza-Labs",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "23087467"
+	},
+	"item": [
+		{
+			"name": "New Relic",
+			"item": [
+				{
+					"name": "Log on New Relic",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "License-Key",
+								"value": "NRAK-ML5Y9ZZY9ALR2KJO8J91W54GNG3",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"level\": \"0\",\r\n    \"message\": \"Teste\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://log-api.newrelic.com/log/v1?Api-Key=145c52f3ddbef058e7de7bd2d3dc8f90FFFFNRAL",
+							"protocol": "https",
+							"host": [
+								"log-api",
+								"newrelic",
+								"com"
+							],
+							"path": [
+								"log",
+								"v1"
+							],
+							"query": [
+								{
+									"key": "Api-Key",
+									"value": "145c52f3ddbef058e7de7bd2d3dc8f90FFFFNRAL"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Health Check",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/api",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "User Register",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Otávio Monteiro Rossoni\",\r\n    \"email\": \"otarossoni@gmail.com\",\r\n    \"password\": \"12345678\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/api/register",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "User Authenticate",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"otarossoni@gmail.com\",\r\n    \"password\": \"12345678\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/api/authenticate",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"authenticate"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Address By CEP",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwYXlsb2FkIjp7InN1YiI6IjQ1NWVlNTI5LTkxZTYtNGVhMS04YmNhLWNiNjExZmYwMGI4NSJ9LCJpYXQiOjE3Mjg4NjI1OTcsImV4cCI6MTcyODg2NDM5N30.lz8CjIXGrqio-lGb2dMyD2Uz9PhBt51qIfzjcrwUYn4",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/api/cep/47850059",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"cep",
+						"47850059"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
