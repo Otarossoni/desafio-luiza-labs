@@ -35,6 +35,8 @@
     * [*3* - Rotas](#rotas)
       * [*3.1* - Públicas](#publicas)
       * [*3.1* - Autenticadas](#autenticadas)
+    * [*4* - Execução da Aplicação](#execucao-aplicacao)
+    * [*5* - Execução de Testes](#execucao-testes)
 2. `[Teórica]` [Resposta](#resposta)
 
 ---
@@ -123,6 +125,38 @@ Todas as rotas disponibilizadas pelo serviço:
   - `POST /api/authenticate`: Autenticação de usuário existente;
 - <span id="autenticadas"></span> *Autenticadas*: 
   - `GET /api/cep/:cep`: Busca dados de endereço pelo CEP;
+
+<span id="execucao-aplicacao"></span> 
+
+##### :gear: Execução da Aplicação
+
+Para executar a aplicação localmente, é necessário ter o [Docker](https://www.docker.com/) instalado. Para instalar de acordo com o sistema operacional usado, [clique aqui](https://docs.docker.com/engine/install/). Então rode no terminal os seguintes comandos:
+
+```bash
+cd server-api # Ou o caminho completo até a aplicação
+
+docker-compose up -d # Subirá todos os serviços necessários
+```
+
+Isso fará com que a aplicação rode na porta configurada no `Dockerfile` e `docker-compose.yml`.
+
+*Observação: As variáveis de ambiente ficaram expostas no código para melhor visualização da aplicação.*
+
+<span id="execucao-testes"></span> 
+
+##### :microscope: Execução de Testes
+
+Para executar os testes da aplicação, é necessário ter o [Node.js](https://nodejs.org/pt) instalado. Para executar os testes, rode no terminal os seguintes comandos:
+
+```bash
+cd server-api # Ou o caminho completo até a aplicação
+
+npm install # Instalar as dependências, incluindo o Vitest
+
+npm run test # Executará os testes unitários
+# ou
+npm run test:coverage # Executará a cobertura de testes
+```
 
 ---
 

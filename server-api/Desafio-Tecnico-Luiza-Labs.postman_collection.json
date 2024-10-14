@@ -60,10 +60,12 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{url}}/api",
+					"raw": "http://localhost:3140/api",
+					"protocol": "http",
 					"host": [
-						"{{url}}"
+						"localhost"
 					],
+					"port": "3140",
 					"path": [
 						"api"
 					]
@@ -86,10 +88,12 @@
 					}
 				},
 				"url": {
-					"raw": "{{url}}/api/register",
+					"raw": "http://localhost:3140/api/register",
+					"protocol": "http",
 					"host": [
-						"{{url}}"
+						"localhost"
 					],
+					"port": "3140",
 					"path": [
 						"api",
 						"register"
@@ -113,10 +117,12 @@
 					}
 				},
 				"url": {
-					"raw": "{{url}}/api/authenticate",
+					"raw": "http://localhost:3140/api/authenticate",
+					"protocol": "http",
 					"host": [
-						"{{url}}"
+						"localhost"
 					],
+					"port": "3140",
 					"path": [
 						"api",
 						"authenticate"
@@ -133,7 +139,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwYXlsb2FkIjp7InN1YiI6IjQ1NWVlNTI5LTkxZTYtNGVhMS04YmNhLWNiNjExZmYwMGI4NSJ9LCJpYXQiOjE3Mjg4NjI1OTcsImV4cCI6MTcyODg2NDM5N30.lz8CjIXGrqio-lGb2dMyD2Uz9PhBt51qIfzjcrwUYn4",
+							"value": "",
 							"type": "string"
 						}
 					]
@@ -141,14 +147,16 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{url}}/api/cep/47850059",
+					"raw": "http://localhost:3140/api/cep/99250000",
+					"protocol": "http",
 					"host": [
-						"{{url}}"
+						"localhost"
 					],
+					"port": "3140",
 					"path": [
 						"api",
 						"cep",
-						"47850059"
+						"99250000"
 					]
 				}
 			},

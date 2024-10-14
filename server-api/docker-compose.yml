@@ -19,3 +19,30 @@ services:
     ports:
       - '6379:6379'
     command: redis-server --requirepass desafio-luizalabs --save ""
+
+  api:
+    container_name: desafio-luizalabs-api
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - '3140:3140'
+    depends_on:
+      - postgres
+      - redis
+    environment:
+      NODE_ENV: development
+      PORT: 3140
+      HASH_SALT_LENGTH: 8
+      JWT_SECRET: "desafio-luizalabs"
+      DATABASE_URL: "postgresql://desafio-luizalabs:desafio-luizalabs@postgres:5432/desafio-luizalabs?schema=public"
+      DNS_SENTRY: "https://5b067899ad251ed510c61bfbe7b9dd8d@o4508098076934144.ingest.us.sentry.io/4508098078900224"
+      NEW_RELIC_API_URL: "https://log-api.newrelic.com/log/v1"
+      NEW_RELIC_APP_NAME: "Desafio Luiza Labs"
+      NEW_RELIC_LICENSE_KEY: "145c52f3ddbef058e7de7bd2d3dc8f90FFFFNRAL"
+      REDIS_HOST: "redis"
+      REDIS_PORT: 6379
+      REDIS_PASSWORD: "desafio-luizalabs"
+      VIA_CEP_API_URL: "https://viacep.com.br/ws"
+    command: >
+      sh -c "until npm run migrate; do echo 'Waiting for database...'; sleep 10; done; npm run start:docker"

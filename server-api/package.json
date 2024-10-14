@@ -7,6 +7,8 @@
     "check": "tsc --noEmit",
     "lint": "eslint src --ext .ts,.mts --fix",
     "start:dev": "tsx watch src/index.ts",
+    "start:docker": "npm run build && node build/index.js",
+    "migrate": "npx prisma migrate dev",
     "test": "vitest run --dir src/domain",
     "test:watch": "vitest --dir src/domain",
     "test:coverage": "vitest run --coverage",
