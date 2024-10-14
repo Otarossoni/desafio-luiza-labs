@@ -37,6 +37,7 @@
       * [*3.1* - Autenticadas](#autenticadas)
     * [*4* - Execução da Aplicação](#execucao-aplicacao)
     * [*5* - Execução de Testes](#execucao-testes)
+    * [*6* - Deploy](#deploy)
 2. `[Teórica]` [Resposta](#resposta)
 
 ---
@@ -157,6 +158,15 @@ npm run test # Executará os testes unitários
 # ou
 npm run test:coverage # Executará a cobertura de testes
 ```
+
+<span id="deploy"></span> 
+
+##### :cloud: Deploy
+
+A aplicação, para mérito demonstrativo, foi hospedada no [Render](https://render.com/). Para acessar a aplicação, acesso uns dos links abaixo:
+
+- [Health Check](https://desafio-luiza-labs-ot8u.onrender.com/api)
+- [Swagger](https://desafio-luiza-labs-ot8u.onrender.com/api-docs)
 
 ---
 
