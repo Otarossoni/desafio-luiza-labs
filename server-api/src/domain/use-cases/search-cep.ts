@@ -78,6 +78,6 @@ export class SearchCepUseCase {
   private validateCep(cep: string): boolean {
     const regexCEP = /^[0-9]{8}$/
 
-    return regexCEP.test(cep.replace(/\D/g, ''))
+    return regexCEP.test(cep)
   }
 }
