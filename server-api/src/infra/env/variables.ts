@@ -11,9 +11,9 @@ const envSchema = z.object({
   DNS_SENTRY: z.string(),
   NEW_RELIC_API_URL: z.string(),
   NEW_RELIC_LICENSE_KEY: z.string(),
-  REDIS_HOST: z.string().optional().nullable(),
+  REDIS_HOST: z.string(),
   REDIS_PORT: z.coerce.number().default(6379),
-  REDIS_PASSWORD: z.string(),
+  REDIS_PASSWORD: z.string().nullable().optional(),
   VIA_CEP_API_URL: z.string(),
 })
 
